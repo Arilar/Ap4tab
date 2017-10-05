@@ -21,6 +21,9 @@ import com.vaadin.ui.VerticalLayout;
  */
 @Theme("mytheme")
 public class MyUI extends UI {
+	
+	
+	//Test Burcu
 
     @Override
     protected void init(VaadinRequest vaadinRequest) {
