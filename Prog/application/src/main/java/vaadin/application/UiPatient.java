@@ -1,9 +1,12 @@
 package vaadin.application;
 
+import com.vaadin.navigator.View;
 import com.vaadin.ui.VerticalLayout;
 
-public class UiPatient extends VerticalLayout{
+public class UiPatient extends VerticalLayout implements View{
 
+
+    protected static final String PATIENT = "PATIENT";
 	/**
 	 * 
 	 */

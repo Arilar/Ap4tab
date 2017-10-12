@@ -4,6 +4,8 @@ import javax.servlet.annotation.WebServlet;
 
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
+import com.vaadin.navigator.Navigator;
+import com.vaadin.navigator.View;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
 import com.vaadin.ui.Button;
@@ -24,22 +26,51 @@ public class MyUI extends UI {
 	
 	//hey
 
+	public Navigator navigator;
+    protected static final String MAINVIEW = "main";
+
+
     @Override
     protected void init(VaadinRequest vaadinRequest) {
-        final VerticalLayout layout = new VerticalLayout();
         
-        final TextField name = new TextField();
-        name.setCaption("Type your name here:");
+        navigator = new Navigator(this, this);
+        navigator.addView("", new UiSelecter(this));
+        navigator.addView("UiLogin", new UiLogin(this));
+        navigator.addView("UiPatient", new UiPatient());
+        navigator.addView("UiRegister", new UiRegister(this));
+        
+    }
+    
+    public void navigateTo(String target) {
+    	
+    	switch (target) {
+		case "UiRegister":
+			try {
+				navigator.removeView(target);
+			} finally {
+				navigator.addView(target, new UiRegister(this));
+			}
+			break;
+		case "UiLogin":
+			try {
+				navigator.removeView(target);
+			} finally {
+				navigator.addView(target, new UiLogin(this));
+			}
+			break;
+		case "":
+			try {
+				navigator.removeView(target);
+			} finally {
+				navigator.addView(target, new UiSelecter(this));
+			}
+			break;
 
-        Button button = new Button("Login");
-        button.addClickListener(e -> {
-            layout.addComponent(new Label("Thanks " + name.getValue() 
-                    + ", it works!"));
-        });
-        
-        layout.addComponents(name, button);
-        
-        setContent(layout);
+		default:
+			break;
+		}
+    	
+    	navigator.navigateTo(target);
     }
 
     @WebServlet(urlPatterns = "/*", name = "MyUIServlet", asyncSupported = true)
