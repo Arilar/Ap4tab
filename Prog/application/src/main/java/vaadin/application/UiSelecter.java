@@ -7,6 +7,10 @@ import com.vaadin.ui.VerticalLayout;
 
 public class UiSelecter extends VerticalLayout implements View {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	MyUI parent;
 	public UiSelecter(UI parent) {
 		this.parent = (MyUI) parent;
@@ -18,7 +22,7 @@ public class UiSelecter extends VerticalLayout implements View {
 
 		login.addClickListener(e -> {this.parent.navigateTo("UiLogin");});
 		register.addClickListener(e -> {this.parent.navigateTo("UiRegister");});
-		//patient.addClickListener(e -> {this.parent.navigateTo("UiPatient");});
+		patient.addClickListener(e -> {this.parent.navigateTo("UiPatient");});
 		
 		this.addComponents(login, register, patient);
 		
