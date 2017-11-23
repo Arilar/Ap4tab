@@ -1,7 +1,10 @@
 package vaadin.application;
 
 import java.util.ArrayList;
+<<<<<<< HEAD
 import java.util.Collections;
+=======
+>>>>>>> master
 import java.util.Date;
 
 import javax.servlet.annotation.WebServlet;
@@ -34,13 +37,18 @@ public class MyUI extends UI {
 	public Navigator navigator;
 	protected static final String MAINVIEW = "main";
 	private BinPerson person;
+<<<<<<< HEAD
 	private ArrayList<BinTermin> allTerms = new ArrayList<>();
+=======
+	private ArrayList<BinTermin> allTerms = new ArrayList<>(10);
+>>>>>>> master
 
 	public BinPerson getPerson() {
 		return person;
 	}
 
 	public ArrayList<BinTermin> getAllTerms() {
+<<<<<<< HEAD
 		ArrayList<BinTermin> result = new ArrayList<>();
 
 		for (BinTermin binTermin : allTerms) {
@@ -57,6 +65,8 @@ public class MyUI extends UI {
 		}
 		Collections.sort(result, new TerminComparatorDate());
 		allTerms = result;
+=======
+>>>>>>> master
 		return allTerms;
 	}
 
@@ -68,6 +78,7 @@ public class MyUI extends UI {
 		navigator.addView("UiLogin", new UiLogin(this));
 		navigator.addView("UiPatient", new UiPatient(this));
 		navigator.addView("UiRegister", new UiRegister(this));
+<<<<<<< HEAD
 		navigator.addView("UiShortList", new UiShortList(this));
 		navigator.addView("UiMoreList", new UiMoreList(this));
 
@@ -99,6 +110,10 @@ public class MyUI extends UI {
 								2311, "7601640333333", "Kantonsspital3", "Kantonsspitaladresse3", 2331, "SpitalStadt3"),
 						new BinType("#321232", "red", "Pending"), (BinPatient) person, new DateL(2017, 12, 8, 18, 15),
 						30, "Terminbeschreibung3", "Saal 333"));
+=======
+		navigator.addView("UiShortList", new UIShortList(this));
+
+>>>>>>> master
 
 	}
 
@@ -112,7 +127,13 @@ public class MyUI extends UI {
 
 	protected boolean testCon() {
 		// TEST PERSON
+<<<<<<< HEAD
 		this.adddata();
+=======
+		person = new BinPatient("usrName", "123", "Mr.", "Test", "TestVorname", new Date(21, 10, 1992), "test@me.ch",
+				"+313243215", "BFH-Strasse 25", "Biel", 2500, "756.2131.22.11", "Assura", "Assurastreet 22", 1700,
+				"Fribourg");
+>>>>>>> master
 		if (person.equals(null)) {
 			return false;
 		} else {
@@ -121,9 +142,35 @@ public class MyUI extends UI {
 		}
 	}
 
+<<<<<<< HEAD
 	protected void getAllTerms(BinPerson pers) {
 		if (pers instanceof BinPatient) {
 			BinPatient person = (BinPatient) pers;
+=======
+	@SuppressWarnings("deprecation")
+	protected void getAllTerms(BinPerson pers) {
+		if (pers instanceof BinPatient) {
+			BinPatient person = (BinPatient) pers;
+			allTerms.add(0,
+					new BinTermin(
+							new BinMedicalStaff("logMed", "123med", "Dr", "Arzt", "vornameArzt", new Date(1960, 12, 25),
+									"dr@med.ch", "0765625341", "Hospitalstreet", "MedizinCity", 2311, "7601640333111",
+									"Kantonsspital", "Kantonsspitaladresse", 2331, "SpitalStadt"),
+							new BinType("#321232", "red"), person, new Date(2017, 10, 29, 22, 13), 30,
+							"Terminbeschreibung", "Saal 111"));
+			allTerms.add(1,
+					new BinTermin(new BinMedicalStaff("logMed2", "123med2", "Dr", "Arzt2", "vornameArzt2",
+							new Date(1960, 12, 25), "dr@med.ch2", "0765625341", "Hospitalstreet2", "MedizinCity2", 2311,
+							"7601640333222", "Kantonsspital2", "Kantonsspitaladresse2", 2331, "SpitalStadt2"),
+							new BinType("#321232", "red"), person, new Date(2017, 10, 28, 22, 13), 30,
+							"Terminbeschreibung2", "Saal 222"));
+			allTerms.add(2,
+					new BinTermin(new BinMedicalStaff("logMed3", "123med3", "Dr3", "Arzt3", "vornameArzt3",
+							new Date(1960, 12, 25), "dr@med.ch3", "0765625341", "Hospitalstreet3", "MedizinCity3", 2311,
+							"7601640333333", "Kantonsspital3", "Kantonsspitaladresse3", 2331, "SpitalStadt3"),
+							new BinType("#321232", "red"), person, new Date(2017, 30, 30, 22, 13), 30,
+							"Terminbeschreibung3", "Saal 333"));
+>>>>>>> master
 
 			// GetallTermins
 			// set it into allTerms
@@ -166,6 +213,7 @@ public class MyUI extends UI {
 			try {
 				navigator.removeView(target);
 			} finally {
+<<<<<<< HEAD
 				navigator.addView(target, new UiShortList(this));
 			}
 			break;
@@ -175,6 +223,9 @@ public class MyUI extends UI {
 				navigator.removeView(target);
 			} finally {
 				navigator.addView(target, new UiMoreList(this));
+=======
+				navigator.addView(target, new UIShortList(this));
+>>>>>>> master
 			}
 			break;
 		case "":

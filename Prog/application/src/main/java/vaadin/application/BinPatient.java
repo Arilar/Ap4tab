@@ -51,7 +51,11 @@ public class BinPatient extends BinPerson {
 		this.insuranceCity = insuranceCity;
 	}
 
+<<<<<<< HEAD
 	public BinPatient(String login, String password, String title, String name, String fname, DateL birthdate, String email, String tel,
+=======
+	public BinPatient(String login, String password, String title, String name, String fname, Date birthdate, String email, String tel,
+>>>>>>> master
 			String adresse, String city, int plz,String ahv, String insuranceName, String insuranceAdress, int insurancePlz,
 			String insuranceCity) {
 		super(login, password, title, name, fname, birthdate, email, tel, adresse, city, plz, 2);
