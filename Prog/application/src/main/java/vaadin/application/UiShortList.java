@@ -24,10 +24,11 @@ public class UiShortList extends VerticalLayout implements View {
 	 */
 	private static final long serialVersionUID = 1L;
 	private MyUI parent;
+	private ArrayList<BinTermin> nextterms = new ArrayList<>();
 
 	public UiShortList(UI parent) {
 		this.parent = (MyUI) parent;
-
+		nextterms = this.parent.getAllTermsfrom(DateL.now());
 		VerticalLayout vl = new VerticalLayout();
 		
 		
@@ -58,7 +59,7 @@ public class UiShortList extends VerticalLayout implements View {
 	}
 
 	private BinTermin getTerminTimed(int nb) {
-		return parent.getAllTerms().get(nb);
+		return nextterms.get(nb);
 	}
 
 }

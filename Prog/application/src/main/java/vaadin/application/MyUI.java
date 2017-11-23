@@ -1,5 +1,7 @@
 package vaadin.application;
 
+import java.lang.reflect.Array;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -92,6 +94,13 @@ public class MyUI extends UI {
 								"Kantonsspital2", "Kantonsspitaladresse2", 2331, "SpitalStadt2"),
 						new BinType("#321232", "red", "Pending"), (BinPatient) person, new DateL(2017, 12, 11, 10, 00),
 						30, "Terminbeschreibung2", "Saal 222"));
+		allTerms.add(1,
+				new BinTermin(
+						new BinMedicalStaff("logMed2", "123med2", "Dr", "Arzt2", "vornameArzt2", new DateL(1961, 06, 8),
+								"dr@med.ch2", "0765625341", "Hospitalstreet2", "MedizinCity2", 2311, "7601640333222",
+								"Kantonsspital2", "Kantonsspitaladresse2", 2331, "SpitalStadt2"),
+						new BinType("#321232", "red", "Pending"), (BinPatient) person, new DateL(2016, 12, 11, 10, 00),
+						30, "Terminbeschreibung2", "Saal XX"));
 		allTerms.add(2,
 				new BinTermin(
 						new BinMedicalStaff("logMed3", "123med3", "Dr3", "Arzt3", "vornameArzt3",
@@ -116,26 +125,28 @@ public class MyUI extends UI {
 		if (person.equals(null)) {
 			return false;
 		} else {
-			getAllTerms(person);
 			return true;
 		}
 	}
 
-	protected void getAllTerms(BinPerson pers) {
-		if (pers instanceof BinPatient) {
-			BinPatient person = (BinPatient) pers;
-
-			// GetallTermins
-			// set it into allTerms
+	protected ArrayList<BinTermin> getAllTermsfrom(Timestamp date) {
+		ArrayList<BinTermin> listfrom = new ArrayList<>();
+		listfrom = getAllTermsSorted();
+		ArrayList<BinTermin> nextTerms = new ArrayList<>();
+		
+		for (int i = 0; i < listfrom.size(); i++) {
+			if(listfrom.get(i).getConsultation().compareTo(date) > 0) {
+				nextTerms.add(listfrom.get(i));
+			}
 		}
-		if (pers instanceof BinMedicalStaff) {
-			BinMedicalStaff person = (BinMedicalStaff) pers;
-			// GetallTermins
-			// set it into allTerms
-		}
+		return nextTerms;
+	}
+	
+	
 
-		// toremoveAfterThis
-
+	public ArrayList<BinTermin> getAllTermsSorted() {
+		Collections.sort(allTerms, new TerminComparatorDate());
+		return allTerms;
 	}
 
 	public void navigateTo(String target) {

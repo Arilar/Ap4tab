@@ -32,6 +32,11 @@ public class DateL extends Timestamp{
 	private int hour; 
 	private int minute;
 	
+	public static Timestamp now() {
+		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+		return timestamp;
+	}
+	
 	public void setDay(int day) {
 		this.day = day;
 	}
