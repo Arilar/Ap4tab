@@ -50,11 +50,7 @@ public class BinMedicalStaff extends BinPerson {
 		this.institutionCity = institutionCity;
 	}
 
-<<<<<<< HEAD
 	public BinMedicalStaff(String login, String password, String title, String name, String fname, DateL birthdate, String email, String tel,
-=======
-	public BinMedicalStaff(String login, String password, String title, String name, String fname, Date birthdate, String email, String tel,
->>>>>>> master
 			String adresse, String city, int plz, String EAN, String institutionName, String institutionAdresse, int institutionPlz, String institutionCity ) {
 		super(login, password, title, name, fname, birthdate, email, tel, adresse, city, plz, 2);
 		this.EAN =EAN;
@@ -63,14 +59,6 @@ public class BinMedicalStaff extends BinPerson {
 		this.institutionPlz = institutionPlz;
 		this.institutionCity = institutionCity;
 	}
-<<<<<<< HEAD
-=======
-	
-	
-	
-	
-	
->>>>>>> master
 
 	/**
 	 * if (obj instanceof MountainBike) { MountainBike myBike = (MountainBike)obj; }
