@@ -29,7 +29,7 @@ public class UiPatient extends VerticalLayout implements View {
 				grid.addComponent(new Label("Vorname :"), 0, 1);
 				grid.addComponent(new Label(patient.getFname()), 1, 1);
 				grid.addComponent(new Label("Geburtsdatum :"), 0, 2);
-				grid.addComponent(new Label(""), 1, 2); //TOADD
+				grid.addComponent(new Label(patient.getBirthdate().toStringSimple()), 1, 2); //TOADD
 				grid.addComponent(new Label("Adresse :"), 0, 3);
 				grid.addComponent(new Label(patient.getAdresse()), 1, 3);
 				grid.addComponent(new Label("Stadt :"), 0, 4);
