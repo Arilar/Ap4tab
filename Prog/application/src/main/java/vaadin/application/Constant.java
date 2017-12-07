@@ -8,6 +8,7 @@ public interface Constant {
 	public static final String USER = "sa";
 	public static final String PASSWORD = "pw";
 	public static final String SRV = "192.168.0.1";
+	public static final String DB="ap4tab";
 
 	// Erreurs SQL
 	public static final String ERRORSQLBDDDRIVER = "Probl�me de chargement du driver de la BDD SQL";

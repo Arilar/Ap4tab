@@ -1,8 +1,6 @@
 package vaadin.application;
 
-import java.text.SimpleDateFormat;
 
-import javax.persistence.Id;
 
 /**
  * The class person is superclass of MedicalStaff and Patient. 
@@ -15,11 +13,7 @@ public class BinPerson {
 	private String login;
 	private String password;
 	private String title;
-	
-	@Id
 	private String name;
-	
-	@Id
 	private String fname;
 	private String email;
 	private String tel;
@@ -28,7 +22,6 @@ public class BinPerson {
 	private int plz;
 	private int persType; // 1=patient 2=medicalStaff
 	private DateL birthdate;
-	private SimpleDateFormat sdf = new SimpleDateFormat("dd.mm.YYYY HH:mm");
 
 	public BinPerson(String login, String password, String title, String name, String fname, DateL birthdate,
 			String email, String tel, String adresse, String city, int plz, int persType) {

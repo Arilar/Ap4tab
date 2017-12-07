@@ -4,7 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * The class is for assignment of case.
@@ -12,24 +12,26 @@ import javax.persistence.Id;
  *
  */
 
+@Table(name = "Case", schema="ap4tab")
 public class BinCase {
 	
-	@Id 
-	private int caseId;
+	@Id
+	@GeneratedValue
+	private long caseId;
 	
 	private String caseName;
-	private String caseType;
+	private BinType caseType;
 	private BinMedicalStaff respDr;
 	private BinPatient patient;
-	private Date startCase;
-	private Date endCase;
+	private DateL startCase;
+	private DateL endCase;
 	private SimpleDateFormat sdf = new SimpleDateFormat("dd MM yyyy");
 	private HashMap<Date, BinTermin> relatedTermins;
 	
-	public int getCaseId() {
+	public long getCaseId() {
 		return caseId;
 	}
-	public void setCaseId(int caseId) {
+	public void setCaseId(long caseId) {
 		this.caseId = caseId;
 	}
 	public String getCaseName() {
@@ -38,10 +40,10 @@ public class BinCase {
 	public void setCaseName(String caseName) {
 		this.caseName = caseName;
 	}
-	public String getCaseType() {
+	public BinType getCaseType() {
 		return caseType;
 	}
-	public void setCaseType(String caseType) {
+	public void setCaseType(BinType caseType) {
 		this.caseType = caseType;
 	}
 	public BinMedicalStaff getRespDr() {
@@ -56,36 +58,29 @@ public class BinCase {
 	public void setPatient(BinPatient patient) {
 		this.patient = patient;
 	}
-	public Date getStartCase() {
+	public DateL getStartCase() {
 		return startCase;
 	}
-	public void setStartCase(Date startCase) {
+	public void setStartCase(DateL startCase) {
 		this.startCase = startCase;
 	}
-	public Date getEndCase() {
+	public DateL getEndCase() {
 		return endCase;
 	}
-	public void setEndCase(Date endCase) {
+	public void setEndCase(DateL endCase) {
 		this.endCase = endCase;
 	}
-	public SimpleDateFormat getSdf() {
-		return sdf;
-	}
-	public void setSdf(SimpleDateFormat sdf) {
-		this.sdf = sdf;
-	}
+
 	
-	public BinCase(int caseId, String caseName, String caseType, BinMedicalStaff respDr, BinPatient patient,
-			Date startCase, Date endCase, SimpleDateFormat sdf) {
+	public BinCase(String caseName, BinType caseType, BinMedicalStaff respDr, BinPatient patient,
+			DateL startCase, DateL endCase) {
 		super();
-		this.caseId = caseId;
 		this.caseName = caseName;
 		this.caseType = caseType;
 		this.respDr = respDr;
 		this.patient = patient;
 		this.startCase = startCase;
 		this.endCase = endCase;
-		this.sdf = sdf;
 	}
 
 	

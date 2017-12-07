@@ -25,6 +25,23 @@ public class DateL extends Timestamp{
 		this.minute = 00;
 	}
 	
+	@SuppressWarnings("deprecation")
+	public Timestamp getTimeStamp() {
+		return new Timestamp(year, month, day, hour, minute, 00, 00);
+	}
+	
+	
+	public DateL(long time) {
+		super(time);
+		this.day = 31;
+		this.month = 12;
+		this.year = 3333;
+		this.hour = 00;
+		this.minute = 00;
+	}
+
+
+
 	private static final long serialVersionUID = 1L;
 	private int day;
 	private int month;
@@ -57,6 +74,10 @@ public class DateL extends Timestamp{
 	public void setMinute(int minute) {
 		this.minute = minute;
 	}
+	
+	
+
+	
 
 	@Override
 	public String toString() {
