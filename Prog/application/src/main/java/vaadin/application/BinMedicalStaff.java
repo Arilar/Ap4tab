@@ -12,8 +12,9 @@ import javax.persistence.*;
 public class BinMedicalStaff extends BinPerson {
 
 	@Id
+	@GeneratedValue
+	private long pk_MS;
 	private String EAN; // eanNumber
-	
 	private String institutionName; // Instiution name
 	private String institutionAdresse; // street and number
 	private int institutionPlz;

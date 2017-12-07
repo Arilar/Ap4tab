@@ -4,7 +4,9 @@ import javax.persistence.*;
 
 @Table(name = "Type", schema="ap4tab")
 public class BinType {
-
+	@Id
+	@GeneratedValue
+	private long pk_type;
 	private String rgb;
 	private String name;
 	private String status;

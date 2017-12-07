@@ -1,7 +1,6 @@
 package vaadin.application;
 
 
-import javax.persistence.*;
 
 /**
  * The class person is superclass of MedicalStaff and Patient. 
@@ -9,17 +8,12 @@ import javax.persistence.*;
  *
  */
 
-@Table(name = "Person", schema="ap4tab")
 public class BinPerson {
 
 	private String login;
 	private String password;
 	private String title;
-	
-	@Id
 	private String name;
-	
-	@Id
 	private String fname;
 	private String email;
 	private String tel;

@@ -15,8 +15,9 @@ import javax.persistence.*;
 @Table(name = "Case", schema="ap4tab")
 public class BinCase {
 	
-	@Id 
-	private int caseId;
+	@Id
+	@GeneratedValue
+	private long caseId;
 	
 	private String caseName;
 	private String caseType;
@@ -27,10 +28,10 @@ public class BinCase {
 	private SimpleDateFormat sdf = new SimpleDateFormat("dd MM yyyy");
 	private HashMap<Date, BinTermin> relatedTermins;
 	
-	public int getCaseId() {
+	public long getCaseId() {
 		return caseId;
 	}
-	public void setCaseId(int caseId) {
+	public void setCaseId(long caseId) {
 		this.caseId = caseId;
 	}
 	public String getCaseName() {
@@ -76,10 +77,9 @@ public class BinCase {
 		this.sdf = sdf;
 	}
 	
-	public BinCase(int caseId, String caseName, String caseType, BinMedicalStaff respDr, BinPatient patient,
+	public BinCase(String caseName, String caseType, BinMedicalStaff respDr, BinPatient patient,
 			Date startCase, Date endCase, SimpleDateFormat sdf) {
 		super();
-		this.caseId = caseId;
 		this.caseName = caseName;
 		this.caseType = caseType;
 		this.respDr = respDr;
