@@ -5,9 +5,9 @@ package vaadin.application;
 public interface Constant {
 
 	// Valeurs de test
-	public static final String USER = "sa";
-	public static final String PASSWORD = "pw";
-	public static final String SRV = "192.168.0.1";
+	public static final String USER = "postgres";
+	public static final String PASSWORD = "db-2017";
+	public static final String SRV = "147.87.116.214";
 	public static final String DB="ap4tab";
 
 	// Erreurs SQL
