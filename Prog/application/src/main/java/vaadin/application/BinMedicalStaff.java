@@ -2,9 +2,17 @@ package vaadin.application;
 
 import java.util.Date;
 
+/**
+ * The class is for staff and intheritance class Person. 
+ * @author burcusevinc
+ *
+ */
+
 public class BinMedicalStaff extends BinPerson {
 
+	@Id
 	private String EAN; // eanNumber
+	
 	private String institutionName; // Instiution name
 	private String institutionAdresse; // street and number
 	private int institutionPlz;

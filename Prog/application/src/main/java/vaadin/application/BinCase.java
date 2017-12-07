@@ -4,8 +4,17 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 
+/**
+ * The class is for assignment of case.
+ * @author burcusevinc
+ *
+ */
+
 public class BinCase {
-	private int caseId; 
+	
+	@Id 
+	private int caseId;
+	
 	private String caseName;
 	private String caseType;
 	private BinMedicalStaff respDr;
@@ -14,7 +23,6 @@ public class BinCase {
 	private Date endCase;
 	private SimpleDateFormat sdf = new SimpleDateFormat("dd MM yyyy");
 	private HashMap<Date, BinTermin> relatedTermins;
-	
 	
 	public int getCaseId() {
 		return caseId;

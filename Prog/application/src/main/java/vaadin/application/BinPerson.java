@@ -2,12 +2,22 @@ package vaadin.application;
 
 import java.text.SimpleDateFormat;
 
+/**
+ * The class person is superclass of MedicalStaff and Patient. 
+ * @author burcusevinc
+ *
+ */
+
 public class BinPerson {
 
 	private String login;
 	private String password;
 	private String title;
+	
+	@Id
 	private String name;
+	
+	@Id
 	private String fname;
 	private String email;
 	private String tel;

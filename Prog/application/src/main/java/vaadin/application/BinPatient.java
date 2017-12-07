@@ -2,6 +2,11 @@ package vaadin.application;
 
 import java.util.Date;
 
+/**
+ * The class is for patient and intheritance class person. 
+ * @author burcusevinc
+ *
+ */
 public class BinPatient extends BinPerson {
 
 	private String ahv; // format 756.7266.2047.88
@@ -10,7 +15,7 @@ public class BinPatient extends BinPerson {
 	private int insurancePlz;
 	private String insuranceCity;
 
-	
+	@Id
 	public String getAhv() {
 		return ahv;
 	}
