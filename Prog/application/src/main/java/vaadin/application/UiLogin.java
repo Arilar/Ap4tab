@@ -10,6 +10,11 @@ import com.vaadin.ui.TextField;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 
+/**
+ * Is view for temporary purpose. 
+ * @author burcusevinc
+ *
+ */
 public class UiLogin extends VerticalLayout implements View {
 
 	/**
