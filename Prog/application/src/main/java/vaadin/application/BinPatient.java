@@ -8,6 +8,7 @@ import javax.persistence.Id;
  *
  */
 public class BinPatient extends BinPerson {
+	
 
 	private String ahv; // format 756.7266.2047.88
 	private String insuranceName; // organisation name
