@@ -1,6 +1,6 @@
 package vaadin.application;
 
-import java.util.Date;
+import javax.persistence.Id;
 
 /**
  * The class is for patient and intheritance class person. 

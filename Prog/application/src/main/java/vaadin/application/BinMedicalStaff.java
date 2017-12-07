@@ -2,6 +2,8 @@ package vaadin.application;
 
 import java.util.Date;
 
+import javax.persistence.Id;
+
 /**
  * The class is for staff and intheritance class Person. 
  * @author burcusevinc

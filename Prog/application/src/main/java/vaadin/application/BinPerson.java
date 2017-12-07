@@ -2,6 +2,8 @@ package vaadin.application;
 
 import java.text.SimpleDateFormat;
 
+import javax.persistence.Id;
+
 /**
  * The class person is superclass of MedicalStaff and Patient. 
  * @author burcusevinc
