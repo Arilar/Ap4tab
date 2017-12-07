@@ -3,6 +3,7 @@ package vaadin.application;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import javax.persistance.*;
 
 /**
  * The class is for assignment of case.
