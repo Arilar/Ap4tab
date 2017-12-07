@@ -3,6 +3,8 @@ package vaadin.application;
 import java.util.Date;
 
 import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 /**
  * The class is for staff and intheritance class Person. 
@@ -10,6 +12,7 @@ import javax.persistence.Id;
  *
  */
 
+@Table(name = "MedicalStaff", schema="ap4tab")
 public class BinMedicalStaff extends BinPerson {
 
 	@Id

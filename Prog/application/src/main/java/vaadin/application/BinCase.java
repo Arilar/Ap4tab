@@ -5,6 +5,8 @@ import java.util.Date;
 import java.util.HashMap;
 
 import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 /**
  * The class is for assignment of case.
@@ -12,6 +14,7 @@ import javax.persistence.Id;
  *
  */
 
+@Table(name = "Case", schema="ap4tab")
 public class BinCase {
 	
 	@Id 

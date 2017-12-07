@@ -4,6 +4,10 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
+
+@Table(name = "Termin", schema="ap4tab")
 public class BinTermin{
 
 	private BinMedicalStaff med;

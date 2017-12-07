@@ -3,6 +3,8 @@ package vaadin.application;
 import java.text.SimpleDateFormat;
 
 import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 /**
  * The class person is superclass of MedicalStaff and Patient. 
@@ -10,6 +12,7 @@ import javax.persistence.Id;
  *
  */
 
+@Table(name = "Person", schema="ap4tab")
 public class BinPerson {
 
 	private String login;

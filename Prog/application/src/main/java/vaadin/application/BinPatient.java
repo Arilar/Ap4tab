@@ -1,14 +1,16 @@
 package vaadin.application;
 
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
- * The class is for patient and intheritance class person. 
+ * The class is for patient and intheritance class person.
+ * 
  * @author burcusevinc
  *
  */
+@Table(name = "Patient", schema="ap4tab")
+
 public class BinPatient extends BinPerson {
-	
 
 	private String ahv; // format 756.7266.2047.88
 	private String insuranceName; // organisation name
@@ -57,9 +59,9 @@ public class BinPatient extends BinPerson {
 		this.insuranceCity = insuranceCity;
 	}
 
-	public BinPatient(String login, String password, String title, String name, String fname, DateL birthdate, String email, String tel,
-			String adresse, String city, int plz,String ahv, String insuranceName, String insuranceAdress, int insurancePlz,
-			String insuranceCity) {
+	public BinPatient(String login, String password, String title, String name, String fname, DateL birthdate,
+			String email, String tel, String adresse, String city, int plz, String ahv, String insuranceName,
+			String insuranceAdress, int insurancePlz, String insuranceCity) {
 		super(login, password, title, name, fname, birthdate, email, tel, adresse, city, plz, 2);
 		this.ahv = ahv;
 		this.insuranceName = insuranceName;
@@ -67,9 +69,6 @@ public class BinPatient extends BinPerson {
 		this.insurancePlz = insurancePlz;
 		this.insuranceCity = insuranceCity;
 	}
-	
-	
-	
 
 	/**
 	 * if (obj instanceof MountainBike) { MountainBike myBike = (MountainBike)obj; }
