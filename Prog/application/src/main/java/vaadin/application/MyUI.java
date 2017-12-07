@@ -36,18 +36,24 @@ public class MyUI extends UI {
 	public Navigator navigator;
 	protected static final String MAINVIEW = "main";
 	private BinPerson person;
+	private BinCase casee;
+	private BinMedicalStaff medstaff;
 	private ArrayList<BinTermin> allTerms = new ArrayList<>();
 
 	public BinPerson getPerson() {
 		return person;
 	}
 
+	/**
+	 * make a list for all terms for each person
+	 * @return
+	 */
 	public ArrayList<BinTermin> getAllTerms() {
 		ArrayList<BinTermin> result = new ArrayList<>();
 
 		for (BinTermin binTermin : allTerms) {
 			if (person instanceof BinPerson) {
-				if (binTermin.getPatient().equals((BinPatient) person)) {
+				if (binTermin.getCaseID().getPatient().equals((BinPatient) person)) {
 					result.add(binTermin);
 				}
 			}
@@ -79,35 +85,28 @@ public class MyUI extends UI {
 		person = new BinPatient("usrName", "123", "Mr.", "Test", "TestVorname", new DateL(1992, 10, 21), "test@me.ch",
 				"+313243215", "BFH-Strasse 25", "Biel", 2500, "756.2131.22.11", "Assura", "Assurastreet 22", 1700,
 				"Fribourg");
+		medstaff = new BinMedicalStaff("logMed", "123med", "Dr", "RestArzt", "RespVornameArzt", new DateL(1950, 05, 12),
+				"dr@med.ch", "0765625341", "Hospitalstreet", "MedizinCity", 2311, "7601640333111",
+				"Kantonsspital", "Kantonsspitaladresse", 2331, "SpitalStadt");
+		BinType caseType = new BinType("#121212", "Error", "in bearbeitung");
+		casee= new BinCase("TestCase", caseType, 
+				medstaff, 
+				(BinPatient) person, new DateL(2017, 10, 13), new DateL(System.currentTimeMillis()));
+		
 
 		allTerms.add(0,
-				new BinTermin(
-						new BinMedicalStaff("logMed", "123med", "Dr", "Arzt", "vornameArzt", new DateL(1950, 05, 12),
-								"dr@med.ch", "0765625341", "Hospitalstreet", "MedizinCity", 2311, "7601640333111",
-								"Kantonsspital", "Kantonsspitaladresse", 2331, "SpitalStadt"),
-						new BinType("#321232", "red", "Pending"), (BinPatient) person, new DateL(2017, 12, 10, 13, 30),
-						30, "Terminbeschreibung", "Saal 111"));
+				new BinTermin(medstaff, caseType, casee, new DateL(2016, 11, 8, 12, 43), 30, 
+						"ProblemDescription", "consultationssaal 2"));
 		allTerms.add(1,
-				new BinTermin(
-						new BinMedicalStaff("logMed2", "123med2", "Dr", "Arzt2", "vornameArzt2", new DateL(1961, 06, 8),
-								"dr@med.ch2", "0765625341", "Hospitalstreet2", "MedizinCity2", 2311, "7601640333222",
-								"Kantonsspital2", "Kantonsspitaladresse2", 2331, "SpitalStadt2"),
-						new BinType("#321232", "red", "Pending"), (BinPatient) person, new DateL(2017, 12, 11, 10, 00),
-						30, "Terminbeschreibung2", "Saal 222"));
-		allTerms.add(1,
-				new BinTermin(
-						new BinMedicalStaff("logMed2", "123med2", "Dr", "Arzt2", "vornameArzt2", new DateL(1961, 06, 8),
-								"dr@med.ch2", "0765625341", "Hospitalstreet2", "MedizinCity2", 2311, "7601640333222",
-								"Kantonsspital2", "Kantonsspitaladresse2", 2331, "SpitalStadt2"),
-						new BinType("#321232", "red", "Pending"), (BinPatient) person, new DateL(2016, 12, 11, 10, 00),
-						30, "Terminbeschreibung2", "Saal XX"));
+				new BinTermin(medstaff, caseType, casee, new DateL(2018, 11, 18, 15, 43), 45, 
+						"ProblemDescription", "consultationssaal 3"));
 		allTerms.add(2,
-				new BinTermin(
-						new BinMedicalStaff("logMed3", "123med3", "Dr3", "Arzt3", "vornameArzt3",
-								new DateL(1976, 01, 15), "dr@med.ch3", "0765625341", "Hospitalstreet3", "MedizinCity3",
-								2311, "7601640333333", "Kantonsspital3", "Kantonsspitaladresse3", 2331, "SpitalStadt3"),
-						new BinType("#321232", "red", "Pending"), (BinPatient) person, new DateL(2017, 12, 8, 18, 15),
-						30, "Terminbeschreibung3", "Saal 333"));
+				new BinTermin(medstaff, caseType, casee, new DateL(2017, 9, 28, 8, 10), 20, 
+						"ProblemDescription", "consultationssaal 1"));
+		allTerms.add(3,
+				new BinTermin(medstaff, caseType, casee, new DateL(2017, 12, 8, 17, 00), 30, 
+						"ProblemDescription", "consultationssaal 5"));
+		
 
 	}
 
@@ -133,16 +132,13 @@ public class MyUI extends UI {
 		ArrayList<BinTermin> listfrom = new ArrayList<>();
 		listfrom = getAllTermsSorted();
 		ArrayList<BinTermin> nextTerms = new ArrayList<>();
-		
 		for (int i = 0; i < listfrom.size(); i++) {
-			if(listfrom.get(i).getConsultation().compareTo(date) > 0) {
+			if(listfrom.get(i).getConsultation().getTimeStamp().after(date)) {
 				nextTerms.add(listfrom.get(i));
 			}
 		}
 		return nextTerms;
 	}
-	
-	
 
 	public ArrayList<BinTermin> getAllTermsSorted() {
 		Collections.sort(allTerms, new TerminComparatorDate());
