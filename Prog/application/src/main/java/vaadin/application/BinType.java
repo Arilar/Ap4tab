@@ -1,7 +1,6 @@
 package vaadin.application;
 
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
+import javax.persistence.*;
 
 @Table(name = "Type", schema="ap4tab")
 public class BinType {
