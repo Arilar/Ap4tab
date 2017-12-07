@@ -4,7 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * The class is for assignment of case.
@@ -12,6 +12,7 @@ import javax.persistence.Id;
  *
  */
 
+@Table(name = "Case", schema="ap4tab")
 public class BinCase {
 	
 	@Id 

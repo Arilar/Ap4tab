@@ -1,9 +1,9 @@
 package vaadin.application;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
+import javax.persistence.*;
+
+@Table(name = "Termin", schema="ap4tab")
 public class BinTermin{
 
 	private BinMedicalStaff med;

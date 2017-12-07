@@ -1,5 +1,8 @@
 package vaadin.application;
 
+import javax.persistence.*;
+
+@Table(name = "Type", schema="ap4tab")
 public class BinType {
 
 	private String rgb;
