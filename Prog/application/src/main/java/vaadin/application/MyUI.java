@@ -137,7 +137,17 @@ public class MyUI extends UI {
 		ArrayList<BinTermin> nextTerms = new ArrayList<>();
 		for (int i = 0; i < listfrom.size(); i++) {
 			if(listfrom.get(i).getConsultation().after(calendar)) {
-				System.out.println(listfrom.get(i).getConsultation() +" is after " +calendar);
+				nextTerms.add(listfrom.get(i));
+			}
+		}
+		return nextTerms;
+	}
+	protected ArrayList<BinTermin> getAllPastTerm(Calendar calendar) {
+		ArrayList<BinTermin> listfrom = new ArrayList<>();
+		listfrom = getAllTermsSorted();
+		ArrayList<BinTermin> nextTerms = new ArrayList<>();
+		for (int i = 0; i < listfrom.size(); i++) {
+			if(listfrom.get(i).getConsultation().before(calendar)) {
 				nextTerms.add(listfrom.get(i));
 			}
 		}
