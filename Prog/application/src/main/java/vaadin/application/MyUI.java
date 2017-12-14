@@ -1,11 +1,8 @@
 package vaadin.application;
 
-import java.lang.reflect.Array;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Date;
-
 import javax.servlet.annotation.WebServlet;
 
 import com.vaadin.annotations.Theme;
@@ -26,9 +23,6 @@ import com.vaadin.ui.UI;
  */
 @Theme("mytheme")
 public class MyUI extends UI {
-	
-	
-	//Test Burcu
 
 	// hey
 
@@ -98,16 +92,16 @@ public class MyUI extends UI {
 		
 
 		allTerms.add(0,
-				new BinTermin(medstaff, caseType, casee, new DateL(2016, 11, 8, 12, 43), 30, 
+				new BinTermin(medstaff, caseType, casee, new DateL(2016, 11, 12, 12, 43), 30, 
 						"ProblemDescription", "consultationssaal 2"));
 		allTerms.add(1,
 				new BinTermin(medstaff, caseType, casee, new DateL(2018, 11, 18, 15, 43), 45, 
 						"ProblemDescription", "consultationssaal 3"));
 		allTerms.add(2,
-				new BinTermin(medstaff, caseType, casee, new DateL(2017, 9, 28, 8, 10), 20, 
+				new BinTermin(medstaff, caseType, casee, new DateL(2017, 11, 28, 18, 10), 20, 
 						"ProblemDescription", "consultationssaal 1"));
 		allTerms.add(3,
-				new BinTermin(medstaff, caseType, casee, new DateL(2017, 12, 8, 17, 00), 30, 
+				new BinTermin(medstaff, caseType, casee, new DateL(2017, 12, 11, 17, 20), 30, 
 						"ProblemDescription", "consultationssaal 5"));
 		
 
@@ -136,7 +130,9 @@ public class MyUI extends UI {
 		listfrom = getAllTermsSorted();
 		ArrayList<BinTermin> nextTerms = new ArrayList<>();
 		for (int i = 0; i < listfrom.size(); i++) {
-			if(listfrom.get(i).getConsultation().getTimeStamp().after(date)) {
+			if(listfrom.get(i).getConsultation().toString().compareTo(date.toString()) > 0) {
+
+				System.out.println(listfrom.get(i).getConsultation() +" is after " +date);
 				nextTerms.add(listfrom.get(i));
 			}
 		}

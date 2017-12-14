@@ -8,7 +8,6 @@ import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
-import com.vaadin.ui.Layout;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 
@@ -33,7 +32,7 @@ public class UiShortList extends VerticalLayout implements View {
 			vla.addComponents(new Label(term.getMed().getTitle() +" " +term.getMed().getName() + " " + term.getMed().getFname()),
 					new Label("tel: "+term.getMed().getTel()), new Label(""),
 					new Label(term.getDescription()));
-			accordion.addTab(vla,term.getConsultation().toString() + " " + term.getLenghofCons()+" s" + term.getEmplacement() );
+			accordion.addTab(vla,term.getConsultation().toStringSimple() + " " + term.getLenghofCons()+" s" + term.getEmplacement() );
 		}
 		
 		

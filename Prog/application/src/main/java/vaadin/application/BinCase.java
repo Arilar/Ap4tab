@@ -1,8 +1,5 @@
 package vaadin.application;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
 
 import javax.persistence.*;
 
@@ -25,8 +22,6 @@ public class BinCase {
 	private BinPatient patient;
 	private DateL startCase;
 	private DateL endCase;
-	private SimpleDateFormat sdf = new SimpleDateFormat("dd MM yyyy");
-	private HashMap<Date, BinTermin> relatedTermins;
 	
 	public long getCaseId() {
 		return caseId;

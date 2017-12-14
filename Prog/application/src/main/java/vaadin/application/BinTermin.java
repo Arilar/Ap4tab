@@ -30,6 +30,12 @@ public class BinTermin{
 		this.emplacement = emplacement;
 	}
 
+	
+	
+	
+	
+	
+
 
 
 

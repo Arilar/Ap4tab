@@ -5,13 +5,16 @@ import java.sql.Timestamp;
 public class DateL extends Timestamp{
 
 
-	public DateL(int year, int month, int day, int hour, int minute) {
+	@SuppressWarnings("deprecation")
+	public DateL(int year, int month, int day, Integer hour, int minute) {
 		super(year, month, day, hour, minute, 00, 00);
 		this.year = year;
 		this.month = month;
 		this.day = day;
 		this.hour = hour;
 		this.minute = minute;
+		this.second = 00;
+		this.milisec = 000;
 		
 	}
 	
@@ -23,11 +26,13 @@ public class DateL extends Timestamp{
 		this.day = day;
 		this.hour = 00;
 		this.minute = 00;
+		this.second = 00;
+		this.milisec = 000;
 	}
 	
 	@SuppressWarnings("deprecation")
 	public Timestamp getTimeStamp() {
-		return new Timestamp(year, month, day, hour, minute, 00, 00);
+		return new Timestamp(year, month, day, hour, minute, second, milisec);
 	}
 	
 	
@@ -38,6 +43,8 @@ public class DateL extends Timestamp{
 		this.year = 3333;
 		this.hour = 00;
 		this.minute = 00;
+		this.second = 00;
+		this.milisec = 000;
 	}
 
 
@@ -48,6 +55,8 @@ public class DateL extends Timestamp{
 	private int year;
 	private int hour; 
 	private int minute;
+	private Integer second;
+	private Integer milisec;
 	
 	public static Timestamp now() {
 		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
@@ -81,7 +90,7 @@ public class DateL extends Timestamp{
 
 	@Override
 	public String toString() {
-		return day +"/" + month + "/" + year + " " +hour + "h" + minute;
+		return year +"-" + month + "-" + day + " " +hour + ":" + minute + ":00.000";
 	}
 
 	public String toStringSimple() {
