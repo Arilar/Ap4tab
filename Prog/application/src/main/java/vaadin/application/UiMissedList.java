@@ -12,41 +12,29 @@ import com.vaadin.ui.Label;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 
-public class UiShortList extends VerticalLayout implements View {
+public class UiMissedList extends VerticalLayout implements View {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	private MyUI parent;
-	private ArrayList<BinTermin> nextterms = new ArrayList<>();
+	private ArrayList<BinTermin> passtterms = new ArrayList<>();
 
-	public UiShortList(UI parent) {
+	public UiMissedList(UI parent) {
 		this.parent = (MyUI) parent;
-		ArrayList<BinTermin> temp = this.parent.getAllTermsfrom(CalendarL.now());
-		for (BinTermin term : temp) {
-			if (!term.isDone())
-				nextterms.add(term);
-		}
+		ArrayList<BinTermin> temp = this.parent.getAllMissedTerm(CalendarL.now());
 		VerticalLayout vl = new VerticalLayout();
 
 		Accordion accordion = new Accordion();
 
-		for (BinTermin term : nextterms) {
+		for (BinTermin term : temp) {
 			VerticalLayout vla = new VerticalLayout();
-			Button button = new Button("Gemacht");
-			button.addClickListener(e -> {
-				if (!term.isDone()) {
-					term.setDone(true);
-					button.setCaption("Nicht gemacht");
-					this.parent.navigateTo("UiShortList");
-				}
-			});
 			vla.addComponents(
 					new Label(
 							term.getMed().getTitle() + " " + term.getMed().getName() + " " + term.getMed().getFname()),
-					new Label("tel: " + term.getMed().getTel()), new Label(""), new Label(term.getDescription()),
-					new Label(""), button);
+					new Label("tel: " + term.getMed().getTel()), new Label(""), new Label(term.getDescription())
+					);
 			Calendar cae = (Calendar) term.getConsultation().clone();
 			cae.add(Calendar.MINUTE, term.getLenghofCons());
 			accordion.addTab(vla, CalendarL.getAD(term.getConsultation()) + " - "
@@ -58,16 +46,16 @@ public class UiShortList extends VerticalLayout implements View {
 		back.addClickListener(e -> {
 			this.parent.navigateTo("");
 		});
-		Button previous = new Button("Past meetings");
+		Button next = new Button("next meetings");
+		next.addClickListener(e -> {
+			this.parent.navigateTo("UiShortList");
+		});
+		Button previous = new Button("previous meetings");
 		previous.addClickListener(e -> {
 			this.parent.navigateTo("UiPastList");
-		}); //UiMissedList
-		Button missed = new Button("Missed meetings");
-		missed.addClickListener(e -> {
-			this.parent.navigateTo("UiMissedList");
 		});
 		HorizontalLayout hl = new HorizontalLayout();
-		hl.addComponents(previous, missed, back);
+		hl.addComponents(previous,next, back);
 		vl.addComponents(accordion, hl);
 		vl.setComponentAlignment(accordion, Alignment.MIDDLE_CENTER);
 		vl.setComponentAlignment(hl, Alignment.MIDDLE_CENTER);

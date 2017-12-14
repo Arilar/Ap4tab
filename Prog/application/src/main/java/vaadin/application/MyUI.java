@@ -78,8 +78,8 @@ public class MyUI extends UI {
 		navigator.addView("UiPatient", new UiPatient(this));
 		navigator.addView("UiRegister", new UiRegister(this));
 		navigator.addView("UiShortList", new UiShortList(this));
-		navigator.addView("UiMoreList", new UiMoreList(this));
-
+		navigator.addView("UiPastList", new UiListPast(this));
+		navigator.addView("UiMissedList", new UiMissedList(this));
 	}	
 
 	private void adddata() {
@@ -145,18 +145,39 @@ public class MyUI extends UI {
 	protected ArrayList<BinTermin> getAllPastTerm(Calendar calendar) {
 		ArrayList<BinTermin> listfrom = new ArrayList<>();
 		listfrom = getAllTermsSorted();
-		ArrayList<BinTermin> nextTerms = new ArrayList<>();
+		ArrayList<BinTermin> pastterm = new ArrayList<>();
 		for (int i = 0; i < listfrom.size(); i++) {
-			if(listfrom.get(i).getConsultation().before(calendar)) {
-				nextTerms.add(listfrom.get(i));
+			if(listfrom.get(i).getConsultation().before(calendar) || listfrom.get(i).isDone()) {
+				pastterm.add(listfrom.get(i));
 			}
 		}
-		return nextTerms;
+		return pastterm;
+	}
+	
+	protected ArrayList<BinTermin> getAllMissedTerm(Calendar calendar) {
+		ArrayList<BinTermin> listfrom = new ArrayList<>();
+		listfrom = getAllTermsSorted();
+		ArrayList<BinTermin> missedterm = new ArrayList<>();
+		for (int i = 0; i < listfrom.size(); i++) {
+			if(listfrom.get(i).getConsultation().before(calendar) && !listfrom.get(i).isDone()) {
+				missedterm.add(listfrom.get(i));
+			}
+		}
+		return missedterm;
 	}
 
 	public ArrayList<BinTermin> getAllTermsSorted() {
 		Collections.sort(allTerms, new CalendarComparator());
 		return allTerms;
+	}
+	
+	public ArrayList<BinTermin> getAllTermRevertSorted(){
+		ArrayList<BinTermin> ar = new ArrayList<BinTermin>(allTerms.size());
+		int i = allTerms.size();
+		for (BinTermin binTermin : allTerms) {
+			ar.add(i, binTermin);
+		}
+		return ar;
 	}
 
 	public void navigateTo(String target) {
@@ -190,12 +211,20 @@ public class MyUI extends UI {
 				navigator.addView(target, new UiShortList(this));
 			}
 			break;
-		// UiMoreList
-		case "UiMoreList":
+			//UiPastList
+		case "UiPastList":
 			try {
 				navigator.removeView(target);
 			} finally {
-				navigator.addView(target, new UiMoreList(this));
+				navigator.addView(target, new UiListPast(this));
+			}
+			break;
+			//UiMissedList
+		case "UiMissedList":
+			try {
+				navigator.removeView(target);
+			} finally {
+				navigator.addView(target, new UiMissedList(this));
 			}
 			break;
 		case "":
