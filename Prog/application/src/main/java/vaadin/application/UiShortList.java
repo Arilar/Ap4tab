@@ -1,6 +1,7 @@
 package vaadin.application;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import com.vaadin.navigator.View;
 import com.vaadin.ui.Accordion;
@@ -24,7 +25,8 @@ public class UiShortList extends VerticalLayout implements View {
 		this.parent = (MyUI) parent;
 		ArrayList<BinTermin> temp = this.parent.getAllTermsfrom(CalendarL.now());
 		for (BinTermin term : temp) {
-			if(!term.isDone()) nextterms.add(term);
+			if (!term.isDone())
+				nextterms.add(term);
 		}
 		VerticalLayout vl = new VerticalLayout();
 
@@ -45,8 +47,11 @@ public class UiShortList extends VerticalLayout implements View {
 							term.getMed().getTitle() + " " + term.getMed().getName() + " " + term.getMed().getFname()),
 					new Label("tel: " + term.getMed().getTel()), new Label(""), new Label(term.getDescription()),
 					new Label(""), button);
-			accordion.addTab(vla, CalendarL.getSD(term.getConsultation()) + " " + term.getLenghofCons() + " s"
-					+ term.getEmplacement());
+			Calendar cae = (Calendar) term.getConsultation().clone();
+			cae.add(Calendar.MINUTE, term.getLenghofCons());
+			accordion.addTab(vla, CalendarL.getAD(term.getConsultation()) + " - "
+					+ CalendarL.getMD(cae)
+					+ " " + term.getEmplacement());
 		}
 
 		Button back = new Button("Back");
@@ -57,13 +62,8 @@ public class UiShortList extends VerticalLayout implements View {
 		previous.addClickListener(e -> {
 			this.parent.navigateTo("");
 		});
-		Button more = new Button("more");
-		more.addClickListener(e -> {
-			this.parent.navigateTo("");
-		});
 		HorizontalLayout hl = new HorizontalLayout();
-		hl.addComponents(previous, back, more);
-		// vl.addComponents(ter1, ter2, ter3);
+		hl.addComponents(previous, back);
 		vl.addComponents(accordion, hl);
 		vl.setComponentAlignment(accordion, Alignment.MIDDLE_CENTER);
 		vl.setComponentAlignment(hl, Alignment.MIDDLE_CENTER);
