@@ -1,5 +1,7 @@
 package vaadin.application;
 
+import java.util.Calendar;
+
 import javax.persistence.*;
 
 /**
@@ -60,7 +62,7 @@ public class BinMedicalStaff extends BinPerson {
 		this.institutionCity = institutionCity;
 	}
 
-	public BinMedicalStaff(String login, String password, String title, String name, String fname, DateL birthdate, String email, String tel,
+	public BinMedicalStaff(String login, String password, String title, String name, String fname, Calendar birthdate, String email, String tel,
 			String adresse, String city, int plz, String EAN, String institutionName, String institutionAdresse, int institutionPlz, String institutionCity ) {
 		super(login, password, title, name, fname, birthdate, email, tel, adresse, city, plz, 2);
 		this.EAN =EAN;

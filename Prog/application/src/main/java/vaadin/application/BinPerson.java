@@ -1,6 +1,6 @@
 package vaadin.application;
 
-
+import java.util.Calendar;
 
 /**
  * The class person is superclass of MedicalStaff and Patient. 
@@ -21,9 +21,9 @@ public class BinPerson {
 	private String city;
 	private int plz;
 	private int persType; // 1=patient 2=medicalStaff
-	private DateL birthdate;
+	private Calendar birthdate;
 
-	public BinPerson(String login, String password, String title, String name, String fname, DateL birthdate,
+	public BinPerson(String login, String password, String title, String name, String fname, Calendar birthdate,
 			String email, String tel, String adresse, String city, int plz, int persType) {
 
 		this.login = login;
@@ -121,11 +121,11 @@ public class BinPerson {
 		this.plz = plz;
 	}
 
-	public DateL getBirthdate() {
+	public Calendar getBirthdate() {
 		return birthdate;
 	}
 
-	public void setBirthdate(DateL birthdate) {
+	public void setBirthdate(Calendar birthdate) {
 		this.birthdate = birthdate;
 	}
 

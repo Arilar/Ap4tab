@@ -1,6 +1,8 @@
 package vaadin.application;
 
 
+import java.util.Calendar;
+
 import javax.persistence.*;
 
 /**
@@ -20,8 +22,8 @@ public class BinCase {
 	private BinType caseType;
 	private BinMedicalStaff respDr;
 	private BinPatient patient;
-	private DateL startCase;
-	private DateL endCase;
+	private Calendar startCase = Calendar.getInstance();
+	private Calendar endCase = Calendar.getInstance();
 	
 	public long getCaseId() {
 		return caseId;
@@ -53,22 +55,22 @@ public class BinCase {
 	public void setPatient(BinPatient patient) {
 		this.patient = patient;
 	}
-	public DateL getStartCase() {
+	public Calendar getStartCase() {
 		return startCase;
 	}
-	public void setStartCase(DateL startCase) {
+	public void setStartCase(Calendar startCase) {
 		this.startCase = startCase;
 	}
-	public DateL getEndCase() {
+	public Calendar getEndCase() {
 		return endCase;
 	}
-	public void setEndCase(DateL endCase) {
+	public void setEndCase(Calendar endCase) {
 		this.endCase = endCase;
 	}
 
 	
 	public BinCase(String caseName, BinType caseType, BinMedicalStaff respDr, BinPatient patient,
-			DateL startCase, DateL endCase) {
+			Calendar startCase, Calendar endCase) {
 		super();
 		this.caseName = caseName;
 		this.caseType = caseType;

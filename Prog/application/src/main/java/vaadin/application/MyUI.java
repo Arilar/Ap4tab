@@ -2,7 +2,10 @@ package vaadin.application;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
+import java.util.Date;
+
 import javax.servlet.annotation.WebServlet;
 
 import com.vaadin.annotations.Theme;
@@ -36,6 +39,7 @@ public class MyUI extends UI {
 	private BinCase casee;
 	private BinMedicalStaff medstaff;
 	private ArrayList<BinTermin> allTerms = new ArrayList<>();
+	private Calendar cal = Calendar.getInstance();
 
 	public BinPerson getPerson() {
 		return person;
@@ -60,7 +64,7 @@ public class MyUI extends UI {
 				}
 			}
 		}
-		Collections.sort(result, new TerminComparatorDate());
+		Collections.sort(result, new CalendarComparator());
 		allTerms = result;
 		return allTerms;
 	}
@@ -76,36 +80,38 @@ public class MyUI extends UI {
 		navigator.addView("UiShortList", new UiShortList(this));
 		navigator.addView("UiMoreList", new UiMoreList(this));
 
-	}
+	}	
 
 	private void adddata() {
-		person = new BinPatient("usrName", "123", "Mr.", "Test", "TestVorname", new DateL(1992, 10, 21), "test@me.ch",
+		person = new BinPatient("usrName", "123", "Mr.", "Test", "TestVorname", CalendarL.setCalendarYMA(1992, 10, 21), "test@me.ch",
 				"+313243215", "BFH-Strasse 25", "Biel", 2500, "756.2131.22.11", "Assura", "Assurastreet 22", 1700,
 				"Fribourg");
-		medstaff = new BinMedicalStaff("logMed", "123med", "Dr", "RestArzt", "RespVornameArzt", new DateL(1950, 05, 12),
+		medstaff = new BinMedicalStaff("logMed", "123med", "Dr", "RestArzt", "RespVornameArzt",CalendarL.setCalendarYMA(1950, 12, 1),
 				"dr@med.ch", "0765625341", "Hospitalstreet", "MedizinCity", 2311, "7601640333111",
 				"Kantonsspital", "Kantonsspitaladresse", 2331, "SpitalStadt");
 		BinType caseType = new BinType("#121212", "Error", "in bearbeitung");
 		casee= new BinCase("TestCase", caseType, 
 				medstaff, 
-				(BinPatient) person, new DateL(2017, 10, 13), new DateL(System.currentTimeMillis()));
+				(BinPatient) person, CalendarL.setCalendarYMA(2017, 10, 13), CalendarL.now());
 		
 
 		allTerms.add(0,
-				new BinTermin(medstaff, caseType, casee, new DateL(2016, 11, 12, 12, 43), 30, 
+				new BinTermin(medstaff, caseType, casee, CalendarL.setCalendarYMAHM(2017, 6, 8, 14, 16), 30, 
 						"ProblemDescription", "consultationssaal 2"));
 		allTerms.add(1,
-				new BinTermin(medstaff, caseType, casee, new DateL(2018, 11, 18, 15, 43), 45, 
+				new BinTermin(medstaff, caseType, casee, CalendarL.setCalendarYMAHM(2018, 11, 18, 15, 43), 45, 
 						"ProblemDescription", "consultationssaal 3"));
 		allTerms.add(2,
-				new BinTermin(medstaff, caseType, casee, new DateL(2017, 11, 28, 18, 10), 20, 
+				new BinTermin(medstaff, caseType, casee, CalendarL.setCalendarYMAHM(2019, 12, 1, 18, 10), 20, 
 						"ProblemDescription", "consultationssaal 1"));
 		allTerms.add(3,
-				new BinTermin(medstaff, caseType, casee, new DateL(2017, 12, 11, 17, 20), 30, 
+				new BinTermin(medstaff, caseType, casee, CalendarL.setCalendarYMAHM(2016, 4, 13, 8, 0), 30, 
 						"ProblemDescription", "consultationssaal 5"));
 		
 
 	}
+	
+	
 
 	protected boolean login(String username, String password) {
 		return true;
@@ -125,14 +131,13 @@ public class MyUI extends UI {
 		}
 	}
 
-	protected ArrayList<BinTermin> getAllTermsfrom(Timestamp date) {
+	protected ArrayList<BinTermin> getAllTermsfrom(Calendar calendar) {
 		ArrayList<BinTermin> listfrom = new ArrayList<>();
 		listfrom = getAllTermsSorted();
 		ArrayList<BinTermin> nextTerms = new ArrayList<>();
 		for (int i = 0; i < listfrom.size(); i++) {
-			if(listfrom.get(i).getConsultation().toString().compareTo(date.toString()) > 0) {
-
-				System.out.println(listfrom.get(i).getConsultation() +" is after " +date);
+			if(listfrom.get(i).getConsultation().after(calendar)) {
+				System.out.println(listfrom.get(i).getConsultation() +" is after " +calendar);
 				nextTerms.add(listfrom.get(i));
 			}
 		}
@@ -140,7 +145,7 @@ public class MyUI extends UI {
 	}
 
 	public ArrayList<BinTermin> getAllTermsSorted() {
-		Collections.sort(allTerms, new TerminComparatorDate());
+		Collections.sort(allTerms, new CalendarComparator());
 		return allTerms;
 	}
 

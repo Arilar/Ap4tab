@@ -22,20 +22,33 @@ public class UiShortList extends VerticalLayout implements View {
 
 	public UiShortList(UI parent) {
 		this.parent = (MyUI) parent;
-		nextterms = this.parent.getAllTermsfrom(DateL.now());
-		VerticalLayout vl = new VerticalLayout();
-		
-		Accordion accordion = new Accordion();
-		
-		for(BinTermin term: nextterms) {
-			VerticalLayout vla = new VerticalLayout();
-			vla.addComponents(new Label(term.getMed().getTitle() +" " +term.getMed().getName() + " " + term.getMed().getFname()),
-					new Label("tel: "+term.getMed().getTel()), new Label(""),
-					new Label(term.getDescription()));
-			accordion.addTab(vla,term.getConsultation().toStringSimple() + " " + term.getLenghofCons()+" s" + term.getEmplacement() );
+		ArrayList<BinTermin> temp = this.parent.getAllTermsfrom(CalendarL.now());
+		for (BinTermin term : temp) {
+			if(!term.isDone()) nextterms.add(term);
 		}
-		
-		
+		VerticalLayout vl = new VerticalLayout();
+
+		Accordion accordion = new Accordion();
+
+		for (BinTermin term : nextterms) {
+			VerticalLayout vla = new VerticalLayout();
+			Button button = new Button("Gemacht");
+			button.addClickListener(e -> {
+				if (!term.isDone()) {
+					term.setDone(true);
+					button.setCaption("Nicht gemacht");
+					this.parent.navigateTo("UiShortList");
+				}
+			});
+			vla.addComponents(
+					new Label(
+							term.getMed().getTitle() + " " + term.getMed().getName() + " " + term.getMed().getFname()),
+					new Label("tel: " + term.getMed().getTel()), new Label(""), new Label(term.getDescription()),
+					new Label(""), button);
+			accordion.addTab(vla, CalendarL.getSD(term.getConsultation()) + " " + term.getLenghofCons() + " s"
+					+ term.getEmplacement());
+		}
+
 		Button back = new Button("Back");
 		back.addClickListener(e -> {
 			this.parent.navigateTo("");
@@ -50,8 +63,8 @@ public class UiShortList extends VerticalLayout implements View {
 		});
 		HorizontalLayout hl = new HorizontalLayout();
 		hl.addComponents(previous, back, more);
-		//vl.addComponents(ter1, ter2, ter3);
-		vl.addComponents(accordion,hl);
+		// vl.addComponents(ter1, ter2, ter3);
+		vl.addComponents(accordion, hl);
 		vl.setComponentAlignment(accordion, Alignment.MIDDLE_CENTER);
 		vl.setComponentAlignment(hl, Alignment.MIDDLE_CENTER);
 
