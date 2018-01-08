@@ -5,10 +5,12 @@ import com.vaadin.navigator.View;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.HorizontalLayout;
+import com.vaadin.ui.Label;
 import com.vaadin.ui.PasswordField;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
+import com.vaadin.ui.Window;
 
 /**
  * Is view for temporary purpose. 
@@ -25,7 +27,7 @@ public class UiLogin extends VerticalLayout implements View {
 
 	public UiLogin(UI parent) {
 		this.parent = (MyUI) parent;
-
+		
 		FormLayout form = new FormLayout();
 		TextField tf1 = new TextField("Benutzername");
 		tf1.setIcon(VaadinIcons.USER);
