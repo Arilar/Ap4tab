@@ -61,7 +61,7 @@ public class UiShortList extends VerticalLayout implements View {
 		Button previous = new Button("Past meetings");
 		previous.addClickListener(e -> {
 			this.parent.navigateTo("UiPastList");
-		}); //UiMissedList
+		}); 
 		Button missed = new Button("Missed meetings");
 		missed.addClickListener(e -> {
 			this.parent.navigateTo("UiMissedList");

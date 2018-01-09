@@ -53,6 +53,7 @@ public class UiListPast extends VerticalLayout implements View {
 					+ CalendarL.getMD(cae)
 					+ " " + term.getEmplacement());
 		}
+		accordion.setSelectedTab(accordion.getComponentCount()-1);
 
 		Button back = new Button("Back");
 		back.addClickListener(e -> {

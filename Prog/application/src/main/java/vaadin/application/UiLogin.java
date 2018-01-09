@@ -27,7 +27,7 @@ public class UiLogin extends VerticalLayout implements View {
 
 	public UiLogin(UI parent) {
 		this.parent = (MyUI) parent;
-		
+		Label errorLogger = new Label();
 		FormLayout form = new FormLayout();
 		TextField tf1 = new TextField("Benutzername");
 		tf1.setIcon(VaadinIcons.USER);
@@ -50,11 +50,16 @@ public class UiLogin extends VerticalLayout implements View {
 		});
 		btLogin.addClickListener(e -> {
 			this.parent.login(tf1.getValue().toString(), pf1.getValue().toString());
+			if(this.parent.isLoggedIn()) {
+				this.parent.navigateTo("UiShortList");
+			} else {
+				errorLogger.setCaption("Wrong login or password");
+			}
 		});
 		btRegister.addClickListener(e -> {
 			this.parent.navigateTo("UiRegister");
 		});
-
+		vl.addComponent(errorLogger);
 		vl.addComponent(form);
 		vl.addComponent(formulaire);
 

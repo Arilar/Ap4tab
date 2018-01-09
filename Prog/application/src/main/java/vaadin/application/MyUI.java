@@ -40,6 +40,7 @@ public class MyUI extends UI {
 	private BinMedicalStaff medstaff;
 	private ArrayList<BinTermin> allTerms = new ArrayList<>();
 	private Calendar cal = Calendar.getInstance();
+	private boolean loggedIn = false;
 
 	public BinPerson getPerson() {
 		return person;
@@ -114,15 +115,27 @@ public class MyUI extends UI {
 	
 
 	protected boolean login(String username, String password) {
-		return true;
+		if(username.equals("Brönnimann") && password.equals("App4Tab")) {
+		navigateTo("UiShortList");
+		loggedIn=true;
+		} 
+		return loggedIn;
 		/*
 		 * if (true) { //test connexion sucessfull //add Person to binPerson
 		 * getAllTerms(this.person); return true; } else { return false; }
 		 */
 	}
+	
+	
+
+	/**
+	 * @return the loggedIn
+	 */
+	public boolean isLoggedIn() {
+		return loggedIn;
+	}
 
 	protected boolean testCon() {
-		// TEST PERSON
 		this.adddata();
 		if (person.equals(null)) {
 			return false;
