@@ -49,13 +49,13 @@ public class UiListPast extends VerticalLayout implements View {
 			vla.addComponents(
 					new Label(
 							term.getMed().getTitle() + " " + term.getMed().getName() + " " + term.getMed().getFname()),
-					new Label("tel: " + term.getMed().getTel()), new Label(""), new Label(term.getDescription()),
-					new Label("ttt"), button);
+					new Label("Tel: " + term.getMed().getTel()), new Label(""), new Label(term.getDescription()),
+					new Label(""), button);
 			} else {
 				vla.addComponents(
 						new Label(
 								term.getMed().getTitle() + " " + term.getMed().getName() + " " + term.getMed().getFname()),
-						new Label("tel: " + term.getMed().getTel()), new Label(""), new Label(term.getDescription()),
+						new Label("Tel: " + term.getMed().getTel()), new Label(""), new Label(term.getDescription()),
 						new Label(""));
 			}
 			Calendar cae = (Calendar) term.getConsultation().clone();
@@ -66,11 +66,11 @@ public class UiListPast extends VerticalLayout implements View {
 		}
 		accordion.setSelectedTab(accordion.getComponentCount()-1);
 
-		Button back = new Button("Back");
+		Button back = new Button("Abmelden");
 		back.addClickListener(e -> {
 			this.parent.navigateTo("");
 		});
-		Button next = new Button("next meetings");
+		Button next = new Button("Nächste Termine");
 		next.addClickListener(e -> {
 			this.parent.navigateTo("UiShortList");
 		});

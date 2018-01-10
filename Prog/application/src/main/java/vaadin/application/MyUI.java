@@ -37,7 +37,10 @@ public class MyUI extends UI {
 	protected static final String MAINVIEW = "main";
 	private BinPerson person;
 	private BinCase casee;
-	private BinMedicalStaff medstaff;
+	private BinMedicalStaff medstaffW;
+	private BinMedicalStaff medstaffK;
+	private BinMedicalStaff medstaffC;
+	private BinMedicalStaff medstaffP;
 	private ArrayList<BinTermin> allTerms = new ArrayList<>();
 	private Calendar cal = Calendar.getInstance();
 	private boolean loggedIn = false;
@@ -77,7 +80,7 @@ public class MyUI extends UI {
 				tester++;
 			}
 		}else if(steps==5) {
-			if(tester==1) {
+			if(tester==5) {
 				steps++;
 				tester=0;
 			} else {
@@ -127,45 +130,67 @@ public class MyUI extends UI {
 	}	
 
 	private void adddata() {
-		person = new BinPatient("usrName", "123", "Mr.", "Test", "TestVorname", CalendarL.setCalendarYMA(1992, 10, 21), "test@me.ch",
-				"+313243215", "BFH-Strasse 25", "Biel", 2500, "756.2131.22.11", "Assura", "Assurastreet 22", 1700,
-				"Fribourg");
-		medstaff = new BinMedicalStaff("logMed", "123med", "Dr", "RestArzt", "RespVornameArzt",CalendarL.setCalendarYMA(1950, 12, 1),
-				"dr@med.ch", "0765625341", "Hospitalstreet", "MedizinCity", 2311, "7601640333111",
+		person = new BinPatient("Brönnimann", "Apps4Tab", "Frau", "Brönnimann", "Elisabeth", CalendarL.setCalendarYMA(1935, 10, 21), "brönnimann.elisabeth@bluewin.ch",
+				"+41795562145", "BFH-Strasse 25", "Biel", 2500, "756.2131.22.11", "Assura", "Assurastreet 22", 2500,
+				"Biel");
+		medstaffW = new BinMedicalStaff("medic", "123456", "Dr", "Wenger", "Roger",CalendarL.setCalendarYMA(1950, 12, 1),
+				"wenger.roger@med.ch", "0765625341", "Hospitalstreet", "MedizinCity", 2311, "7601640333111",
 				"Kantonsspital", "Kantonsspitaladresse", 2331, "SpitalStadt");
+		medstaffK = new BinMedicalStaff("medic", "234566", "Dr", "Knochenbrecher", "Ivan",CalendarL.setCalendarYMA(1950, 12, 1),
+				"knochenbrecher.ivan@med.ch", "0790492040", "Rotestrasse", "Praxis Knochenbrecher", 86, "760100678789",
+				"Praxis Knochenbrecher", "Rotestrasse", 2502, "Biel/Bienne");
+		medstaffC = new BinMedicalStaff("medic", "083458", "Dr", "Mao-Tao", "Ling",CalendarL.setCalendarYMA(1950, 12, 1),
+				"maotao-ling@med.ch", "0760947843", "Bahnhofstrasse", "MedizinCity", 234, "76010908976",
+				"Spitalzentrum Biel", "Chante-Merle 84", 2501, "Biel/Bienne");
+		medstaffP = new BinMedicalStaff("medic", "234084", "", "Van Denn", "Jean-Claude",CalendarL.setCalendarYMA(1950, 12, 1),
+				"vandenn.jeanclaude@med.ch", "0784592034", "Mühlebrücke", "Physio Van Denn", 8, "76019068990",
+				"Physio Van Denn", "Mühlebrücke", 2502, "Biel/Bienne");
+		
 		BinType caseType = new BinType("#121212", "Error", "in bearbeitung");
 		casee= new BinCase("TestCase", caseType, 
-				medstaff, 
+				medstaffW, 
 				(BinPatient) person, CalendarL.setCalendarYMA(2017, 10, 13), CalendarL.now());
 		
 
 		allTerms.add(0,
-				new BinTermin(medstaff, caseType, casee, CalendarL.setCalendarYMAHM(2018, 6, 8, 14, 16), 30, 
-						"WENGER", "consultationssaal 2"));
+				new BinTermin(medstaffW, caseType, casee, CalendarL.setCalendarYMAHM(2018, 1, 11, 15, 30), 30, 
+						"Konsultation", "Konsultationssaal 1"));
 		allTerms.add(1,
-				new BinTermin(medstaff, caseType, casee, CalendarL.setCalendarYMAHM(2018, 11, 18, 15, 43), 45, 
-						"Hüft CT", "consultationssaal 3"));
+				new BinTermin(medstaffK, caseType, casee, CalendarL.setCalendarYMAHM(2018, 1, 13, 15, 30), 15, 
+						"CT linker Hüft", "Röntgensaal 3"));
 		allTerms.add(2,
-				new BinTermin(medstaff, caseType, casee, CalendarL.setCalendarYMAHM(2019, 12, 1, 18, 10), 20, 
-						"KNOCHENBRECHER", "consultationssaal 1"));
+				new BinTermin(medstaffK, caseType, casee, CalendarL.setCalendarYMAHM(2018, 1, 15, 18, 15), 60, 
+						"Konsultation mit dem Spezialist in Orthopädie", "Konsultationssaal 1"));
 		allTerms.add(3,
-				new BinTermin(medstaff, caseType, casee, CalendarL.setCalendarYMAHM(2018, 4, 11, 8, 0), 30, 
-						"Spitaleintritt", "consultationssaal 5"));
+				new BinTermin(medstaffC, caseType, casee, CalendarL.setCalendarYMAHM(2018, 2, 1, 8, 30), 10, 
+						"Spitaleintritt", "Eingang 1"));
 		allTerms.add(4,
-				new BinTermin(medstaff, caseType, casee, CalendarL.setCalendarYMAHM(2018, 4, 12, 8, 0), 30, 
-						"Spital 1", "consultationssaal 5"));
+				new BinTermin(medstaffC, caseType, casee, CalendarL.setCalendarYMAHM(2018, 2, 1, 9, 30), 30, 
+						"Präoperative Untersuchung", "Konsultationssaal 3, 2. Stock"));
 		allTerms.add(5,
-				new BinTermin(medstaff, caseType, casee, CalendarL.setCalendarYMAHM(2018, 4, 13, 8, 0), 30, 
-						"Spital 2", "consultationssaal 5"));
+				new BinTermin(medstaffC, caseType, casee, CalendarL.setCalendarYMAHM(2018, 2, 2, 16, 30), 120, 
+						"Hüftprothesenersatz Operation", "Operationssaal 32b, Erdgeschoss"));
 		allTerms.add(6,
-				new BinTermin(medstaff, caseType, casee, CalendarL.setCalendarYMAHM(2018, 4, 14, 8, 0), 30, 
-						"Spital 3", "consultationssaal 5"));
+				new BinTermin(medstaffC, caseType, casee, CalendarL.setCalendarYMAHM(2018, 2, 3, 10, 30), 30, 
+						"Postoperative Untersuchung", "Konsultationssaal 2, 2. Stock"));
 		allTerms.add(7,
-				new BinTermin(medstaff, caseType, casee, CalendarL.setCalendarYMAHM(2018, 4, 15, 8, 0), 30, 
-						"Physio", "consultationssaal 5"));
+				new BinTermin(medstaffP, caseType, casee, CalendarL.setCalendarYMAHM(2018, 2, 10, 7, 50), 45, 
+						"Physiotherapie", "Physiosaal 2, 1. Stock"));
 		allTerms.add(8,
-				new BinTermin(medstaff, caseType, casee, CalendarL.setCalendarYMAHM(2018, 4, 16, 8, 0), 30, 
-						"Knochenbrecher", "consultationssaal 5"));
+				new BinTermin(medstaffP, caseType, casee, CalendarL.setCalendarYMAHM(2018, 2, 15, 7, 50), 45, 
+						"Physiotherapie", "Physiosaal 2, 1. Stock"));
+		allTerms.add(9,
+				new BinTermin(medstaffP, caseType, casee, CalendarL.setCalendarYMAHM(2018, 2, 20, 7, 50), 45, 
+						"Physiotherapie", "Physiosaal 2, 1. Stock"));
+		allTerms.add(10,
+				new BinTermin(medstaffP, caseType, casee, CalendarL.setCalendarYMAHM(2018, 2, 25, 7, 50), 45, 
+						"Physiotherapie", "Physiosaal 2, 1. Stock"));
+		allTerms.add(11,
+				new BinTermin(medstaffP, caseType, casee, CalendarL.setCalendarYMAHM(2018, 2, 30, 7, 50), 45, 
+						"Physiotherapie", "Physiosaal 2, 1. Stock"));
+		allTerms.add(12,
+				new BinTermin(medstaffK, caseType, casee, CalendarL.setCalendarYMAHM(2018, 3, 8, 9, 15), 45, 
+						"Postoperative Kontrolle der Hüftprothese", "Konsultationssaal 1"));
 		allTerms.get(0).setStep(1);
 		allTerms.get(1).setStep(2);
 		allTerms.get(2).setStep(2);
@@ -175,6 +200,10 @@ public class MyUI extends UI {
 		allTerms.get(6).setStep(4);
 		allTerms.get(7).setStep(5);
 		allTerms.get(8).setStep(5);
+		allTerms.get(9).setStep(5);
+		allTerms.get(10).setStep(5);
+		allTerms.get(11).setStep(5);
+		allTerms.get(12).setStep(5);
 		
 
 	}

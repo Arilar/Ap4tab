@@ -52,7 +52,7 @@ public class UiShortList extends VerticalLayout implements View {
 			vla.addComponents(
 					new Label(
 							term.getMed().getTitle() + " " + term.getMed().getName() + " " + term.getMed().getFname()),
-					new Label("tel: " + term.getMed().getTel()), new Label(""), new Label(term.getDescription()),
+					new Label("Tel: " + term.getMed().getTel()), new Label(""), new Label(term.getDescription()),
 					new Label(""), button);
 			Calendar cae = (Calendar) term.getConsultation().clone();
 			cae.add(Calendar.MINUTE, term.getLenghofCons());
@@ -65,7 +65,7 @@ public class UiShortList extends VerticalLayout implements View {
 		back.addClickListener(e -> {
 			this.parent.navigateTo("");
 		});
-		Button previous = new Button("Past meetings");
+		Button previous = new Button("Vergangene Termine");
 		previous.addClickListener(e -> {
 			this.parent.navigateTo("UiPastList");
 		}); 
