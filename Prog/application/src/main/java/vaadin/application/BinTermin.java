@@ -18,6 +18,7 @@ public class BinTermin {
 	private String description;
 	private String emplacement;
 	private boolean done;
+	private int step;
 
 	public BinTermin(BinMedicalStaff med, BinType terminCase, BinCase caseID, Calendar consultation, int lenghofCons,
 			String description, String emplacement) {
@@ -29,6 +30,7 @@ public class BinTermin {
 		this.description = description;
 		this.emplacement = emplacement;
 		done = false;
+		step = 0;
 	}
 
 	/**
@@ -135,8 +137,6 @@ public class BinTermin {
 	public void setEmplacement(String emplacement) {
 		this.emplacement = emplacement;
 	}
-	
-	
 
 	/**
 	 * @return the done
@@ -146,16 +146,33 @@ public class BinTermin {
 	}
 
 	/**
-	 * @param done the done to set
+	 * @param done
+	 *            the done to set
 	 */
 	public void setDone(boolean done) {
 		this.done = done;
 	}
 
+	/**
+	 * @return the step
+	 */
+	public int getStep() {
+		return step;
+	}
+
+	/**
+	 * @param step
+	 *            the step to set
+	 */
+	public void setStep(int step) {
+		this.step = step;
+	}
+
 	@Override
 	public String toString() {
 		return consultation.get(Calendar.YEAR) + "/" + consultation.get(Calendar.MONTH) + "/"
-				+ consultation.get(Calendar.DAY_OF_MONTH) +" "+ consultation.get(Calendar.HOUR) +":" +consultation.get(Calendar.MINUTE)+ " " + emplacement;
+				+ consultation.get(Calendar.DAY_OF_MONTH) + " " + consultation.get(Calendar.HOUR) + ":"
+				+ consultation.get(Calendar.MINUTE) + " " + emplacement;
 	}
 
 }

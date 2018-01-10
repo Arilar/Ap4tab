@@ -38,16 +38,11 @@ public class UiLogin extends VerticalLayout implements View {
 
 		VerticalLayout vl = new VerticalLayout();
 		HorizontalLayout formulaire = new HorizontalLayout();
-		Button btCancel = new Button("Abbrechen", VaadinIcons.CLOSE_SMALL);
 		Button btRegister = new Button("Registrieren");
 		Button btLogin = new Button("Login");
 		formulaire.addComponent(btLogin);
-		formulaire.addComponent(btCancel);
 		formulaire.addComponent(btRegister);
 
-		btCancel.addClickListener(e -> {
-			this.parent.navigateTo("");
-		});
 		btLogin.addClickListener(e -> {
 			this.parent.login(tf1.getValue().toString(), pf1.getValue().toString());
 			if(this.parent.isLoggedIn()) {

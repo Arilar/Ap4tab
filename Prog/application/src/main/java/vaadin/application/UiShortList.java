@@ -25,11 +25,17 @@ public class UiShortList extends VerticalLayout implements View {
 		this.parent = (MyUI) parent;
 		ArrayList<BinTermin> temp = this.parent.getAllTermsfrom(CalendarL.now());
 		for (BinTermin term : temp) {
-			if (!term.isDone())
+			if (!term.isDone()) {
+				if(term.getStep()==this.parent.steps) {
 				nextterms.add(term);
+				}
+			}
 		}
 		VerticalLayout vl = new VerticalLayout();
-
+		Label bal = new Label("Nächste Termine");
+		bal.addStyleName( "h1" );
+		vl.addComponent(bal);
+		vl.setComponentAlignment(bal, Alignment.MIDDLE_CENTER);
 		Accordion accordion = new Accordion();
 
 		for (BinTermin term : nextterms) {
@@ -38,6 +44,7 @@ public class UiShortList extends VerticalLayout implements View {
 			button.addClickListener(e -> {
 				if (!term.isDone()) {
 					term.setDone(true);
+					this.parent.incTester();
 					button.setCaption("Nicht gemacht");
 					this.parent.navigateTo("UiShortList");
 				}
@@ -54,7 +61,7 @@ public class UiShortList extends VerticalLayout implements View {
 					+ " " + term.getEmplacement());
 		}
 
-		Button back = new Button("Back");
+		Button back = new Button("Abmelden");
 		back.addClickListener(e -> {
 			this.parent.navigateTo("");
 		});
@@ -62,12 +69,8 @@ public class UiShortList extends VerticalLayout implements View {
 		previous.addClickListener(e -> {
 			this.parent.navigateTo("UiPastList");
 		}); 
-		Button missed = new Button("Missed meetings");
-		missed.addClickListener(e -> {
-			this.parent.navigateTo("UiMissedList");
-		});
 		HorizontalLayout hl = new HorizontalLayout();
-		hl.addComponents(previous, missed, back);
+		hl.addComponents(previous, back);
 		vl.addComponents(accordion, hl);
 		vl.setComponentAlignment(accordion, Alignment.MIDDLE_CENTER);
 		vl.setComponentAlignment(hl, Alignment.MIDDLE_CENTER);

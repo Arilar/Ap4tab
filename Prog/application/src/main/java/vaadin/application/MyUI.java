@@ -41,6 +41,50 @@ public class MyUI extends UI {
 	private ArrayList<BinTermin> allTerms = new ArrayList<>();
 	private Calendar cal = Calendar.getInstance();
 	private boolean loggedIn = false;
+	public int steps=1;
+	private int tester = 0;
+
+	
+
+
+	/**
+	 * @return the tester
+	 */
+	public int getTester() {
+		return tester;
+	}
+
+	/**
+	 * @param tester the tester to set
+	 */
+	public void incTester() {
+		if(steps==1) {
+			steps++;
+		}else if(steps==2) {
+			if(tester==1) {
+				steps++;
+				tester=0;
+			} else {
+				tester++;
+			}
+		}else if(steps==3) {
+			steps++;
+		}else if(steps==4) {
+			if(tester==2) {
+				steps++;
+				tester=0;
+			} else {
+				tester++;
+			}
+		}else if(steps==5) {
+			if(tester==1) {
+				steps++;
+				tester=0;
+			} else {
+				tester++;
+			}
+		}
+	}
 
 	public BinPerson getPerson() {
 		return person;
@@ -74,13 +118,12 @@ public class MyUI extends UI {
 	protected void init(VaadinRequest vaadinRequest) {
 
 		navigator = new Navigator(this, this);
-		navigator.addView("", new UiSelecter(this));
+		navigator.addView("", new UiLogin(this));
 		navigator.addView("UiLogin", new UiLogin(this));
 		navigator.addView("UiPatient", new UiPatient(this));
 		navigator.addView("UiRegister", new UiRegister(this));
 		navigator.addView("UiShortList", new UiShortList(this));
 		navigator.addView("UiPastList", new UiListPast(this));
-		navigator.addView("UiMissedList", new UiMissedList(this));
 	}	
 
 	private void adddata() {
@@ -97,17 +140,41 @@ public class MyUI extends UI {
 		
 
 		allTerms.add(0,
-				new BinTermin(medstaff, caseType, casee, CalendarL.setCalendarYMAHM(2017, 6, 8, 14, 16), 30, 
-						"ProblemDescription", "consultationssaal 2"));
+				new BinTermin(medstaff, caseType, casee, CalendarL.setCalendarYMAHM(2018, 6, 8, 14, 16), 30, 
+						"WENGER", "consultationssaal 2"));
 		allTerms.add(1,
 				new BinTermin(medstaff, caseType, casee, CalendarL.setCalendarYMAHM(2018, 11, 18, 15, 43), 45, 
-						"ProblemDescription", "consultationssaal 3"));
+						"Hüft CT", "consultationssaal 3"));
 		allTerms.add(2,
 				new BinTermin(medstaff, caseType, casee, CalendarL.setCalendarYMAHM(2019, 12, 1, 18, 10), 20, 
-						"ProblemDescription", "consultationssaal 1"));
+						"KNOCHENBRECHER", "consultationssaal 1"));
 		allTerms.add(3,
-				new BinTermin(medstaff, caseType, casee, CalendarL.setCalendarYMAHM(2016, 4, 13, 8, 0), 30, 
-						"ProblemDescription", "consultationssaal 5"));
+				new BinTermin(medstaff, caseType, casee, CalendarL.setCalendarYMAHM(2018, 4, 11, 8, 0), 30, 
+						"Spitaleintritt", "consultationssaal 5"));
+		allTerms.add(4,
+				new BinTermin(medstaff, caseType, casee, CalendarL.setCalendarYMAHM(2018, 4, 12, 8, 0), 30, 
+						"Spital 1", "consultationssaal 5"));
+		allTerms.add(5,
+				new BinTermin(medstaff, caseType, casee, CalendarL.setCalendarYMAHM(2018, 4, 13, 8, 0), 30, 
+						"Spital 2", "consultationssaal 5"));
+		allTerms.add(6,
+				new BinTermin(medstaff, caseType, casee, CalendarL.setCalendarYMAHM(2018, 4, 14, 8, 0), 30, 
+						"Spital 3", "consultationssaal 5"));
+		allTerms.add(7,
+				new BinTermin(medstaff, caseType, casee, CalendarL.setCalendarYMAHM(2018, 4, 15, 8, 0), 30, 
+						"Physio", "consultationssaal 5"));
+		allTerms.add(8,
+				new BinTermin(medstaff, caseType, casee, CalendarL.setCalendarYMAHM(2018, 4, 16, 8, 0), 30, 
+						"Knochenbrecher", "consultationssaal 5"));
+		allTerms.get(0).setStep(1);
+		allTerms.get(1).setStep(2);
+		allTerms.get(2).setStep(2);
+		allTerms.get(3).setStep(3);
+		allTerms.get(4).setStep(4);
+		allTerms.get(5).setStep(4);
+		allTerms.get(6).setStep(4);
+		allTerms.get(7).setStep(5);
+		allTerms.get(8).setStep(5);
 		
 
 	}
@@ -232,19 +299,11 @@ public class MyUI extends UI {
 				navigator.addView(target, new UiListPast(this));
 			}
 			break;
-			//UiMissedList
-		case "UiMissedList":
-			try {
-				navigator.removeView(target);
-			} finally {
-				navigator.addView(target, new UiMissedList(this));
-			}
-			break;
 		case "":
 			try {
 				navigator.removeView(target);
 			} finally {
-				navigator.addView(target, new UiSelecter(this));
+				navigator.addView(target, new UiLogin(this));
 			}
 			break;
 

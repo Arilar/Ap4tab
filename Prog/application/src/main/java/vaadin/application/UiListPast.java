@@ -25,7 +25,10 @@ public class UiListPast extends VerticalLayout implements View {
 		this.parent = (MyUI) parent;
 		ArrayList<BinTermin> temp = this.parent.getAllPastTerm(CalendarL.now());
 		VerticalLayout vl = new VerticalLayout();
-
+		Label bal = new Label("Vergangene Termine");
+		bal.addStyleName( "h1" );
+		vl.addComponent(bal);
+		vl.setComponentAlignment(bal, Alignment.MIDDLE_CENTER);
 		Accordion accordion = new Accordion();
 
 		for (BinTermin term : temp) {
@@ -42,11 +45,19 @@ public class UiListPast extends VerticalLayout implements View {
 					this.parent.navigateTo("UiPastList");
 				}
 			});
+			if(term.getConsultation().after(Calendar.getInstance().getTime())) { 
 			vla.addComponents(
 					new Label(
 							term.getMed().getTitle() + " " + term.getMed().getName() + " " + term.getMed().getFname()),
 					new Label("tel: " + term.getMed().getTel()), new Label(""), new Label(term.getDescription()),
-					new Label(""), button);
+					new Label("ttt"), button);
+			} else {
+				vla.addComponents(
+						new Label(
+								term.getMed().getTitle() + " " + term.getMed().getName() + " " + term.getMed().getFname()),
+						new Label("tel: " + term.getMed().getTel()), new Label(""), new Label(term.getDescription()),
+						new Label(""));
+			}
 			Calendar cae = (Calendar) term.getConsultation().clone();
 			cae.add(Calendar.MINUTE, term.getLenghofCons());
 			accordion.addTab(vla, CalendarL.getAD(term.getConsultation()) + " - "
@@ -59,16 +70,13 @@ public class UiListPast extends VerticalLayout implements View {
 		back.addClickListener(e -> {
 			this.parent.navigateTo("");
 		});
-		Button previous = new Button("next meetings");
-		previous.addClickListener(e -> {
+		Button next = new Button("next meetings");
+		next.addClickListener(e -> {
 			this.parent.navigateTo("UiShortList");
 		});
-		Button missed = new Button("missed meetings");
-		previous.addClickListener(e -> {
-			this.parent.navigateTo("UiMissedList");
-		});
+		
 		HorizontalLayout hl = new HorizontalLayout();
-		hl.addComponents(previous,missed, back);
+		hl.addComponents(next, back);
 		vl.addComponents(accordion, hl);
 		vl.setComponentAlignment(accordion, Alignment.MIDDLE_CENTER);
 		vl.setComponentAlignment(hl, Alignment.MIDDLE_CENTER);
